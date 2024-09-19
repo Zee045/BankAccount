@@ -1,38 +1,35 @@
-class BankAccount:
-    #Shaza Ghanem
-    bank_title = "Your Bank Name"
+from bank_account import SavingsAccount, CheckingAccount
 
-    def __init__(self, customer_name, current_balance, minimum_balance=None):
-        self.customer_name = customer_name
-        self.current_balance = current_balance
-        self.minimum_balance = minimum_balance
+def main():
+    # Create instances of SavingsAccount
+    savings1 = SavingsAccount("Alice", 1000, 100, 0.05)
+    savings2 = SavingsAccount("Bob", 500, 50, 0.03)
 
-    def deposit(self, amount):
-        self.current_balance += amount
-        print(f"Was Deposited: ${amount} . New balance is {self.current_balance}")
+    # Create instances of CheckingAccount
+    checking1 = CheckingAccount("Charlie", 2000, 200, 500)
+    checking2 = CheckingAccount("Dana", 1500, 150, 300)
 
-    def withdraw(self, amount):
-        if self.current_balance - amount >= self.minimum_balance: #to make sure the withdrawal is only allowed if the remaining balance after the withdrawal is above the minimum balance
-            self.current_balance -= amount
-            print(f"Withdrew: ${amount} . New balance is {self.current_balance}")
-        else:
-            print("Denied: Insufficient balance")
+    # Test methods for SavingsAccount
+    savings1.deposit(200)
+    savings1.add_interest()
+    savings1.withdraw(150)
+    savings1.customer_information()
 
-    def customer_information(self):
-        print(f"Bank: {self.bank_title}")
-        print(f"Customer: {self.customer_name}")
-        print(f"Current Balance: {self.current_balance}")
-        print(f"Minimum Balance: {self.minimum_balance}")
+    savings2.deposit(300)
+    savings2.add_interest()
+    savings2.withdraw(100)
+    savings2.customer_information()
 
- # Create instances
-account1 = BankAccount("Alice", 1000, 100)
-account2 = BankAccount("Bob", 500, 50)
+    # Test methods for CheckingAccount
+    checking1.deposit(500)
+    checking1.transfer(400)
+    checking1.withdraw(300)
+    checking1.customer_information()
 
-# Test methods
-account1.deposit(200)
-account1.withdraw(150)
-account1.customer_information()
+    checking2.deposit(200)
+    checking2.transfer(350)
+    checking2.withdraw(100)
+    checking2.customer_information()
 
-account2.deposit(300)
-account2.withdraw(100)
-account2.customer_information()
+if __name__ == "__main__":
+    main()
